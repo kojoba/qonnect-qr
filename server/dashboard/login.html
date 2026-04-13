@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="/dashboard/css/style.css" />
+</head>
+<body>
+  <div class="login-shell">
+    <div class="login-card">
+      <h1>Admin Login</h1>
+      <p>Sign in to manage your QR card platform.</p>
+
+      <form id="loginForm" class="form-grid">
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" required />
+        </div>
+
+        <div>
+          <label>Password</label>
+          <input type="password" name="password" required />
+        </div>
+
+        <button class="btn btn-primary" type="submit">Login</button>
+      </form>
+
+      <p id="message" style="margin-top:14px; color:#fca5a5;"></p>
+    </div>
+  </div>
+
+  <script src="/dashboard/js/login.js"></script>
+</body>
+</html>

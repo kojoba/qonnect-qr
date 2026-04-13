@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Analytics</title>
+  <link rel="stylesheet" href="/dashboard/css/style.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-badge">Q</div>
+        <div class="brand-text">
+          <h2>QR Cards</h2>
+          <p>Admin Dashboard</p>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <p class="nav-title">Management</p>
+        <div class="nav-links">
+          <a class="nav-link" href="/dashboard/index.html">Overview</a>
+          <a class="nav-link" href="/dashboard/users.html">Users</a>
+          <a class="nav-link" href="/dashboard/tiers.html">Card Tiers</a>
+          <a class="nav-link" href="/dashboard/cards.html">Cards</a>
+          <a class="nav-link" href="/dashboard/contacts.html">Contacts</a>
+          <a class="nav-link active" href="/dashboard/qrcodes.html">QR Codes</a>
+          <a class="nav-link" href="/dashboard/analytics.html">Analytics</a>
+          <a class="nav-link" id="staffNavLink" href="/dashboard/staff.html">Staff</a>
+          <a class="nav-link" href="/dashboard/audit-logs.html" id="auditNavLink">Audit Logs</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="page-heading">
+          <h1>QR Analytics</h1>
+          <p id="qrAnalyticsSubtitle">Loading QR analytics...</p>
+        </div>
+
+        <div class="topbar-actions">
+          <a class="btn btn-secondary" href="/dashboard/qrcodes.html">Back to QR Codes</a>
+          <a class="btn btn-primary" id="qrCsvExportBtn" type="button">Download CSV</a>
+          <button class="btn btn-secondary" onclick="logout()">Logout</button>
+        </div>
+      </div>
+
+      <div id="qrAnalyticsContent"></div>
+    </main>
+  </div>
+
+  <script src="/dashboard/js/hide.js"></script>
+  <script src="/dashboard/js/auth.js"></script>
+  <script src="/dashboard/js/ui.js"></script>
+  <script src="/dashboard/js/modal.js"></script>
+  <script>
+    requireAuth();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/dashboard/js/qr-analytics.js"></script>
+</body>
+</html>

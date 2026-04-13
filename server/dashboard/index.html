@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Card Dashboard</title>
+  <link rel="stylesheet" href="/dashboard/css/style.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-badge">QQ</div>
+        <div class="brand-text">
+          <h2>Qonnect QR</h2>
+          <p>Admin Dashboard</p>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <p class="nav-title">Management</p>
+        <div class="nav-links">
+          <a class="nav-link active" href="/dashboard/index.html">Overview</a>
+          <a class="nav-link" href="/dashboard/users.html">Users</a>
+          <a class="nav-link" href="/dashboard/tiers.html">Card Tiers</a>
+          <a class="nav-link" href="/dashboard/cards.html">Cards</a>
+          <a class="nav-link" href="/dashboard/contacts.html">Contacts</a>
+          <a class="nav-link" href="/dashboard/qrcodes.html">QR Codes</a>
+          <a class="nav-link" href="/dashboard/analytics.html">Analytics</a>
+          <a class="nav-link" id="staffNavLink" href="/dashboard/staff.html">Staff</a>
+          <a class="nav-link" href="/dashboard/audit-logs.html" id="auditNavLink">Audit Logs</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="page-heading">
+          <h1>Dashboard Overview</h1>
+          <p>Manage users, cards, QR codes, and scan activity.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="page-actions" id="roleBadgeWrap"></div>
+          <button class="btn btn-secondary" onclick="logout()">Logout</button>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          <h3>Total Users</h3>
+          <p id="totalUsers">--</p>
+        </div>
+        <div class="summary-card">
+          <h3>Total QR Codes</h3>
+          <p id="totalQRCodes">--</p>
+        </div>
+        <div class="summary-card">
+          <h3>Total Scans</h3>
+          <p id="totalScans">--</p>
+        </div>
+      </div>
+
+      <div style="height: 22px;"></div>
+
+      <div class="layout-grid">
+        <section class="panel">
+          <h2>System Status</h2>
+          <p class="panel-subtitle">Quick view of the platform state.</p>
+
+          <div class="records">
+            <div class="record-card">
+              <div class="record-top">
+                <div>
+                  <h3 class="record-title">Backend</h3>
+                  <p class="record-subtitle">API and services</p>
+                </div>
+                <span class="badge badge-success">Running</span>
+              </div>
+            </div>
+
+            <div class="record-card">
+              <div class="record-top">
+                <div>
+                  <h3 class="record-title">Dynamic QR</h3>
+                  <p class="record-subtitle">Profile and vCard routes</p>
+                </div>
+                <span class="badge badge-success">Enabled</span>
+              </div>
+            </div>
+
+            <div class="record-card">
+              <div class="record-top">
+                <div>
+                  <h3 class="record-title">Dashboard Security</h3>
+                  <p class="record-subtitle">Admin authentication</p>
+                </div>
+                <span class="badge badge-success">Protected</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Quick Actions</h2>
+          <p class="panel-subtitle">Jump straight into common tasks.</p>
+
+          <div class="records">
+            <a class="record-card" href="/dashboard/users.html">
+              <h3 class="record-title">Create User</h3>
+              <p class="record-subtitle">Add a new person to the system.</p>
+            </a>
+
+            <a class="record-card" href="/dashboard/cards.html">
+              <h3 class="record-title">Issue Card</h3>
+              <p class="record-subtitle">Create a digital card record.</p>
+            </a>
+
+            <a class="record-card" href="/dashboard/qrcodes.html">
+              <h3 class="record-title">Generate QR</h3>
+              <p class="record-subtitle">Create a dynamic QR code for a user.</p>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="/dashboard/js/hide.js"></script>
+  <script src="/dashboard/js/auth.js"></script>
+  <script src="/dashboard/js/ui.js"></script>
+  <script src="/dashboard/js/modal.js"></script>
+  <script>
+    requireAuth();
+  </script>
+  <script src="/dashboard/js/app.js"></script>
+</body>
+</html>

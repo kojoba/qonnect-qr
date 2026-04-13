@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Tiers</title>
+    <link rel="stylesheet" href="/dashboard/css/style.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-badge">QQ</div>
+          <div class="brand-text">
+            <h2>Qonnect QR</h2>
+            <p>Admin Dashboard</p>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-title">Management</p>
+          <div class="nav-links">
+            <a class="nav-link" href="/dashboard/index.html">Overview</a>
+            <a class="nav-link" href="/dashboard/users.html">Users</a>
+            <a class="nav-link active" href="/dashboard/tiers.html"
+              >Card Tiers</a
+            >
+            <a class="nav-link" href="/dashboard/cards.html">Cards</a>
+            <a class="nav-link" href="/dashboard/contacts.html">Contacts</a>
+            <a class="nav-link" href="/dashboard/qrcodes.html">QR Codes</a>
+            <a class="nav-link" href="/dashboard/analytics.html">Analytics</a>
+            <a class="nav-link" id="staffNavLink" href="/dashboard/staff.html">Staff</a>
+            <a class="nav-link" href="/dashboard/audit-logs.html" id="auditNavLink">Audit Logs</a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div class="page-heading">
+            <h1>Card Tiers</h1>
+            <p>
+              Define the levels and features available for digital and smart
+              cards.
+            </p>
+          </div>
+
+          <div class="topbar-actions">
+            <button class="btn btn-secondary" onclick="logout()">Logout</button>
+          </div>
+        </div>
+
+        <div class="layout-grid">
+          <section class="panel">
+            <h2>Create Tier</h2>
+            <p class="panel-subtitle">
+              Set up a new tier like Standard, Gold, Platinum, or Elite.
+            </p>
+
+            <form id="tierForm" class="form-grid">
+              <div>
+                <label>Tier Name</label>
+                <input type="text" name="tier_name" required />
+              </div>
+
+              <div>
+                <label>Description</label>
+                <input type="text" name="description" />
+              </div>
+
+              <div>
+                <label>Material</label>
+                <input type="text" name="material" />
+              </div>
+
+              <div class="checkbox-row">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="has_nfc" />
+                  <span>Has NFC</span>
+                </label>
+
+                <label class="checkbox-item">
+                  <input type="checkbox" name="has_dynamic_qr" checked />
+                  <span>Has Dynamic QR</span>
+                </label>
+
+                <label class="checkbox-item">
+                  <input type="checkbox" name="scan_analytics_enabled" />
+                  <span>Scan Analytics Enabled</span>
+                </label>
+              </div>
+
+              <input type="hidden" name="id" />
+
+              <div class="record-actions">
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  id="tierSubmitBtn"
+                >
+                  Create Tier
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  id="tierCancelBtn"
+                  style="display: none"
+                >
+                  Cancel Edit
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel">
+            <h2>All Tiers</h2>
+            <p class="panel-subtitle">
+              View the card levels currently available in the system.
+            </p>
+
+            <div class="toolbar">
+              <input
+                type="text"
+                id="userSearch"
+                class="search-input"
+                placeholder="Search by name, email, phone..."
+              />
+              <select id="userStatusFilter" class="filter-select">
+                <option value="">All Statuses</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="suspended">Suspended</option>
+              </select>
+            </div>
+            <div id="tierList" class="records"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="/dashboard/js/hide.js"></script>
+    <script src="/dashboard/js/auth.js"></script>
+    <script src="/dashboard/js/ui.js"></script>
+    <script src="/dashboard/js/modal.js"></script>
+    <script>
+      requireAuth();
+    </script>
+    <script src="/dashboard/js/tiers.js"></script>
+  </body>
+</html>

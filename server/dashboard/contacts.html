@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Profiles</title>
+    <link rel="stylesheet" href="/dashboard/css/style.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-badge">QQ</div>
+          <div class="brand-text">
+            <h2>Qonnect QR</h2>
+            <p>Admin Dashboard</p>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-title">Management</p>
+          <div class="nav-links">
+            <a class="nav-link" href="/dashboard/index.html">Overview</a>
+            <a class="nav-link" href="/dashboard/users.html">Users</a>
+            <a class="nav-link" href="/dashboard/tiers.html">Card Tiers</a>
+            <a class="nav-link" href="/dashboard/cards.html">Cards</a>
+            <a class="nav-link active" href="/dashboard/contacts.html"
+              >Contacts</a
+            >
+            <a class="nav-link" href="/dashboard/qrcodes.html">QR Codes</a>
+            <a class="nav-link" href="/dashboard/analytics.html">Analytics</a>
+            <a class="nav-link" id="staffNavLink" href="/dashboard/staff.html">Staff</a>
+            <a class="nav-link" href="/dashboard/audit-logs.html" id="auditNavLink">Audit Logs</a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div class="page-heading">
+            <h1>Contact Profiles</h1>
+            <p>
+              Manage the public contact details shown when a QR code is scanned.
+            </p>
+          </div>
+
+          <div class="topbar-actions">
+            <button class="btn btn-secondary" onclick="logout()">Logout</button>
+          </div>
+        </div>
+
+        <div class="layout-grid">
+          <section class="panel">
+            <h2>Create Contact Profile</h2>
+            <p class="panel-subtitle">
+              Add the contact details users will expose publicly.
+            </p>
+
+            <form id="contactForm" class="form-grid">
+              <div class="form-row">
+                <div>
+                  <label>User</label>
+                  <select name="user_id" id="contactUserSelect" required>
+                    <option value="">Select user</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Display Name</label>
+                  <input type="text" name="display_name" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div>
+                  <label>Primary Phone Number</label>
+                  <input type="text" name="phone_primary" />
+                </div>
+                <div>
+                  <label>Primary Email</label>
+                  <input type="email" name="email_primary" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div>
+                  <label>Secondary Phone</label>
+                  <input type="text" name="phone_secondary" />
+                </div>
+                <div>
+                  <label>Secondary Email</label>
+                  <input type="email" name="email_secondary" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div>
+                  <label>Address</label>
+                  <input type="text" name="address" />
+                </div>
+                <div>
+                  <label>LinkedIn URL</label>
+                  <input type="text" name="linkedin_url" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div>
+                  <label>Profile Photo URL</label>
+                  <input type="text" name="profile_photo_url" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div>
+                  <label>Website</label>
+                  <input type="text" name="website" />
+                </div>
+                <div>
+                  <label>WhatsApp Number</label>
+                  <input type="text" name="whatsapp_number" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div>
+                  <label>City</label>
+                  <input type="text" name="city" />
+                </div>
+                <div>
+                  <label>Country</label>
+                  <input type="text" name="country" />
+                </div>
+              </div>
+
+              <div>
+                <label>Bio</label>
+                <textarea name="bio"></textarea>
+              </div>
+
+              <input type="hidden" name="id" />
+
+              <div class="record-actions">
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  id="contactSubmitBtn"
+                >
+                  Create Contact Profile
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  id="contactCancelBtn"
+                  style="display: none"
+                >
+                  Cancel Edit
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel">
+            <h2>All Contact Profiles</h2>
+            <p class="panel-subtitle">
+              Public contact records linked to system users.
+            </p>
+
+            <div class="toolbar">
+              <input
+                type="text"
+                id="contactSearch"
+                class="search-input"
+                placeholder="Search display name, email, phone..."
+              />
+              <select id="contactCountryFilter" class="filter-select">
+                <option value="">All Countries</option>
+              </select>
+            </div>
+            <div id="contactList" class="records"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="/dashboard/js/hide.js"></script>
+    <script src="/dashboard/js/auth.js"></script>
+    <script src="/dashboard/js/ui.js"></script>
+    <script src="/dashboard/js/modal.js"></script>
+    <script>
+      requireAuth();
+    </script>
+    <script src="/dashboard/js/contacts.js"></script>
+  </body>
+</html>

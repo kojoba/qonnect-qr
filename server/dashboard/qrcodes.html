@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Codes</title>
+    <link rel="stylesheet" href="/dashboard/css/style.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-badge">QQ</div>
+          <div class="brand-text">
+            <h2>Qonnect QR</h2>
+            <p>Admin Dashboard</p>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-title">Management</p>
+          <div class="nav-links">
+            <a class="nav-link" href="/dashboard/index.html">Overview</a>
+            <a class="nav-link" href="/dashboard/users.html">Users</a>
+            <a class="nav-link" href="/dashboard/tiers.html">Card Tiers</a>
+            <a class="nav-link" href="/dashboard/cards.html">Cards</a>
+            <a class="nav-link" href="/dashboard/contacts.html">Contacts</a>
+            <a class="nav-link active" href="/dashboard/qrcodes.html"
+              >QR Codes</a
+            >
+            <a class="nav-link" href="/dashboard/analytics.html">Analytics</a>
+            <a class="nav-link" id="staffNavLink" href="/dashboard/staff.html">Staff</a>
+            <a class="nav-link" href="/dashboard/audit-logs.html" id="auditNavLink">Audit Logs</a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div class="page-heading">
+            <h1>QR Codes</h1>
+            <p>
+              Generate and manage dynamic QR codes for cards and contact
+              profiles.
+            </p>
+          </div>
+
+          <div class="topbar-actions">
+            <button class="btn btn-secondary" onclick="logout()">Logout</button>
+          </div>
+        </div>
+
+        <div class="layout-grid">
+          <section class="panel">
+            <h2>Generate QR</h2>
+            <p class="panel-subtitle">
+              Create a dynamic QR linked to a user profile.
+            </p>
+
+            <form id="qrForm" class="form-grid">
+              <div class="form-row">
+                <div>
+                  <label>User</label>
+                  <select name="user_id" id="qrUserSelect" required>
+                    <option value="">Select user</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Card (optional)</label>
+                  <select name="card_id" id="qrCardSelect">
+                    <option value="">No linked card</option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" type="submit">Generate QR</button>
+            </form>
+          </section>
+
+          <section class="panel">
+            <h2>Generated QRs</h2>
+            <p class="panel-subtitle">
+              Track the QR records currently stored in the system.
+            </p>
+
+            <div class="toolbar">
+              <input
+                type="text"
+                id="qrSearch"
+                class="search-input"
+                placeholder="Search short code, user, card..."
+              />
+              <select id="qrStatusFilter" class="filter-select">
+                <option value="">All Statuses</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+            <div id="qrList" class="records"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="/dashboard/js/hide.js"></script>
+    <script src="/dashboard/js/auth.js"></script>
+    <script src="/dashboard/js/ui.js"></script>
+    <script src="/dashboard/js/modal.js"></script>
+    <script>
+      requireAuth();
+    </script>
+    <script src="/dashboard/js/qrcodes.js"></script>
+  </body>
+</html>
