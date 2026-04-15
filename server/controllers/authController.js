@@ -18,12 +18,79 @@ function generateToken(admin){
     )
 }
 
-async function loginAdmin(req, res){
-    try{
-        const {email, password} = req.body
+// async function loginAdmin(req, res){
+//     try{
+//         const {email, password} = req.body
 
-        if (!email || !password){
-            return errorResponse(res, "Email and password are required", 400)
+//         if (!email || !password){
+//             return errorResponse(res, "Email and password are required", 400)
+//         }
+
+//         const result = await pool.query(
+//             `
+//             SELECT * FROM system_users
+//             WHERE email = $1 AND status = 'active'
+//             LIMIT 1
+//             `,
+//             [email]
+//         )
+
+//         if (result.rows.length === 0){
+//             return errorResponse(res, "Invalid email or password", 401)
+//         }
+
+//         const admin = result.rows[0]
+//         const isMatch = await bcrypt.compare(password, admin.password_hash)
+
+//         if (!isMatch){
+//             return errorResponse(res, "Invalid email or password", 401)
+//         }
+
+//         await pool.query(
+//             `
+//                 UPDATE system_users
+//                 SET last_login = CURRENT_TIMESTAMP
+//                 WHERE id = $1
+//             `,
+//             [admin.id]
+//         )
+
+//         const token = generateToken(admin)
+
+//         await logAudit({
+//             actorId: admin.id,
+//             actorRole: admin.role,
+//             action: "login",
+//             entityType: "auth",
+//             entityId: admin.id,
+//             description: `${admin.full_name} logged into the dashboard`,
+//             metadata: {
+//                 email: admin.email,
+//             },
+//         });
+
+//         return successResponse(res, "Login successful", {
+//             token,
+//             admin: {
+//                 id: admin.id,
+//                 full_name: admin.full_name,
+//                 email: admin.email,
+//                 role: admin.role,
+//             },
+//         })
+//     }
+//     catch (error) {
+//         return errorResponse(res, error.message)
+//     }
+// }
+
+async function loginAdmin(req, res) {
+    try {
+        const { email, password } = req.body;
+        console.log("LOGIN BODY:", req.body);
+
+        if (!email || !password) {
+            return errorResponse(res, "Email and password are required", 400);
         }
 
         const result = await pool.query(
@@ -33,17 +100,28 @@ async function loginAdmin(req, res){
             LIMIT 1
             `,
             [email]
-        )
+        );
 
-        if (result.rows.length === 0){
-            return errorResponse(res, "Invalid email or password", 401)
+        console.log("LOGIN QUERY ROWS:", result.rows.length);
+
+        if (result.rows.length === 0) {
+            return errorResponse(res, "Invalid email or password", 401);
         }
 
-        const admin = result.rows[0]
-        const isMatch = await bcrypt.compare(password, admin.password_hash)
+        const admin = result.rows[0];
+        console.log("ADMIN FOUND:", {
+            id: admin.id,
+            email: admin.email,
+            role: admin.role,
+            hasPasswordHash: !!admin.password_hash,
+            status: admin.status
+        });
 
-        if (!isMatch){
-            return errorResponse(res, "Invalid email or password", 401)
+        const isMatch = await bcrypt.compare(password, admin.password_hash);
+        console.log("PASSWORD MATCH:", isMatch);
+
+        if (!isMatch) {
+            return errorResponse(res, "Invalid email or password", 401);
         }
 
         await pool.query(
@@ -53,9 +131,11 @@ async function loginAdmin(req, res){
                 WHERE id = $1
             `,
             [admin.id]
-        )
+        );
+        console.log("LAST LOGIN UPDATED");
 
-        const token = generateToken(admin)
+        const token = generateToken(admin);
+        console.log("TOKEN GENERATED");
 
         await logAudit({
             actorId: admin.id,
@@ -68,6 +148,7 @@ async function loginAdmin(req, res){
                 email: admin.email,
             },
         });
+        console.log("AUDIT LOG WRITTEN");
 
         return successResponse(res, "Login successful", {
             token,
@@ -77,10 +158,10 @@ async function loginAdmin(req, res){
                 email: admin.email,
                 role: admin.role,
             },
-        })
-    }
-    catch (error) {
-        return errorResponse(res, error.message)
+        });
+    } catch (error) {
+        console.error("LOGIN ADMIN ERROR:", error);
+        return errorResponse(res, error.message, 500);
     }
 }
 
