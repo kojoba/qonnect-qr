@@ -58,8 +58,8 @@ async function generateQrForUser(req, res) {
 
     const targetUrl =
       tierName && tierName.toLowerCase() === "elite"
-        ? `${process.env.BASE_URL}/p/${shortCode}/vcard`
-        : `${process.env.BASE_URL}/c/${shortCode}`;
+        ? `${process.env.FRONTEND_URL}/p/${shortCode}/vcard`
+        : `${process.env.FRONTEND_URL}/c/${shortCode}`;
 
     const imagePath = await generateQrImage(targetUrl, shortCode);
 
